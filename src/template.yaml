@@ -1,0 +1,32 @@
+MyFunctionDemo:
+  Component: fc
+  Provider: alibaba
+  Properties:
+    Region: cn-hangzhou
+    Service:
+      Name: custom-runtime-demo-bbk
+      Nas:
+        Type: Auto
+        FcDir: /mnt/auto
+        LocalDir: .fun/root
+    Function:
+      Name: custom-powershell
+      CodeUri:
+        Src: ./
+        Excludes:
+          - .s
+          - .env
+          - fcfile
+          - .fun
+          - README.md
+          - template.yaml
+      CAPort: 9000
+      Handler: index.handler
+      MemorySize: 512
+      Runtime: custom
+      Timeout: 60
+      Environment:
+        - Key: 'PATH'
+          Value: '/mnt/auto/root/opt/microsoft/powershell/7'
+        - Key: 'LD_LIBRARY_PATH'
+          Value: '/mnt/auto/root/usr/lib:/mnt/auto/root/usr/lib/x86_64-linux-gnu:/mnt/auto/root/lib/x86_64-linux-gnu:/mnt/auto/root/usr/lib64'
